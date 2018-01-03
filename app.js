@@ -1,20 +1,20 @@
 let express = require("express");
-let bluebird = require("bluebird");
 let path = require("path");
 let favicon = require("serve-favicon");
 let logger = require("morgan");
 let cookieParser = require("cookie-parser");
 let bodyParser = require("body-parser");
 
-let app = express();
-
 let index = require("./routes/index.route");
 let users = require("./routes/users.route");
-
-// Get the API route
 let api = require("./routes/api.route");
 
+let bluebird = require("bluebird");
+
+let app = express();
+
 let mongoose = require("mongoose");
+mongoose.Promise = bluebird;
 mongoose
   .connect("mongodb://127.0.0.1:27017/todoapp")
   .then(() => {
