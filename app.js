@@ -28,9 +28,8 @@ mongoose
     );
   });
 
-// Allow CORS
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:4200");
+  res.header("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
@@ -51,11 +50,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-//Use the Routes
 app.use("/", index);
 app.use("/users", users);
-
-//Use the API routes for all routes matching /api
 app.use("/api", api);
 
 // catch 404 and forward to error handler

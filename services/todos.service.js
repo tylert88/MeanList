@@ -1,7 +1,7 @@
 // Gettign the Newly created Mongoose Model we just created
 let ToDo = require("../models/todo.model");
 
-// Saving the context of this module inside the _the variable
+// Saving the context of this module inside the _this variable
 _this = this;
 
 // Async function to get the To do List
@@ -47,11 +47,10 @@ exports.createTodo = async function(todo) {
 
 exports.updateTodo = async function(todo) {
   let id = todo.id;
+  //Find the old Todo Object by the Id
+  let oldTodo = await ToDo.findById(id);
 
   try {
-    //Find the old Todo Object by the Id
-
-    let oldTodo = await ToDo.findById(id);
   } catch (e) {
     throw Error("Error occured while Finding the Todo");
   }
@@ -79,7 +78,6 @@ exports.updateTodo = async function(todo) {
 };
 
 exports.deleteTodo = async function(id) {
-  // Delete the Todo
   try {
     let deleted = await ToDo.remove({ _id: id });
     if (deleted.result.n === 0) {
